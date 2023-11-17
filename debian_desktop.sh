@@ -42,6 +42,7 @@ install_if_not_found "sbcl"
 # APPLICATIONS
 install_if_not_found "chromium-browser"
 install_if_not_found "firefox"
+install_if_not_found "gparted"
 install_if_not_found "libreoffice"
 install_if_not_found "obs-studio"
 install_if_not_found "pgadmin4"
