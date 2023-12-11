@@ -35,6 +35,7 @@ install_if_not_found "openjdk-19-jdk" # replace the java version with default-jd
                                       # sudo apt-get purge --autoremove openjdk* removes Java from your system
 install_if_not_found "python3"
 install_if_not_found "python3-pip"
+install_if_not_found "python3-venv"
 install_if_not_found "r-base-core"
 install_if_not_found "sbcl"
 
