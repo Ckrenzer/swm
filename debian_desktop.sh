@@ -10,6 +10,13 @@ function install_if_not_found(){
         sudo apt install "$1" -y || echo "ISSUE INSTALLING $1"
     fi
 }
+function pip_install_if_not_found(){
+    if pip3 list | grep "^$1\ "; then
+        echo "$1 already installed"
+    else
+        sudo pip install "$1" || echo "ISSUE INSTALLING $1"
+    fi
+}
 
 
 # PROGRAMMING LANGUAGES, COMPLIERS, ETC.
@@ -76,6 +83,32 @@ install_if_not_found "tmux"
 install_if_not_found "xdotool"        # used in some vim functions to turn off caps lock
 
 
+# PIP3 INSTALLS
+pip_install_if_not_found "numpy"
+pip_install_if_not_found "pandas"
+# youtube-dl is always out of date on apt.
+# YouTube's actions make this tool unstable.
+# The pip installation is your best bet.
+pip_install_if_not_found "youtube-dl"
+
+
+# R PACKAGES
+sudo Rscript -e "pkgs <- commandArgs(trailingOnly = TRUE)
+                 installed <- rownames(installed.packages())
+                 pkgs <- pkgs[!pkgs %in% installed]
+                 install.packages(pkgs)" \
+                     data.table \
+                     foreach    \
+                     iterators  \
+                     parallel   \
+                     doParallel \
+                     rlang      \
+                     stringr    \
+                     ggplot2    \
+                     openxlsx   \
+                     clipr
+
+
 # SPECIAL HANDLING
 # <<latest stable version of neovim>>
 if dpkg -l | grep "^ii\ \+neovim "; then
@@ -92,7 +125,7 @@ fi
 # drivers from repo to use external monitors through docking stations (among other uses)
 synaptics_file="$HOME/Downloads/synaptics-repository-keyring.deb" # path to the repository on disk
 curl "https://www.synaptics.com/sites/default/files/Ubuntu/pool/stable/main/all/synaptics-repository-keyring.deb" -o "$synaptics_file"
-install_if_not_fouund "${synaptics_file}"
+install_if_not_found "${synaptics_file}"
 install_if_not_found "displaylink-driver"
 # <<End display link driver installation>>
 
@@ -101,13 +134,6 @@ test -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" || \
     curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # <<End vimplug installation script>>
-
-# <<youtube-dl installation>>
-# This package is always out of date on apt. YouTube's actions make this tool unstable.
-# The pip installation is your best bet.
-pip3 list | grep "youtube-dl" || sudo pip3 install youtube-dl
-#  to update: sudo pip3 install --upgrade youtube-dl
-# <<End youtube-dl installation>>
 
 # <<quicklisp installation>>
 if test -e ~/quicklisp/setup.lisp; then
