@@ -59,6 +59,7 @@ install_if_not_found "obs-studio"
 install_if_not_found "pgadmin4"
 install_if_not_found "slack"
 install_if_not_found "tor"
+install_if_not_found "virtualbox"
 install_if_not_found "vlc-bin"
 install_if_not_found "zoom-player"
 
