@@ -20,7 +20,7 @@ function pip_install_if_not_found(){
 
 
 # PROGRAMMING LANGUAGES, COMPLIERS, ETC.
-install_if_not_found "buildapp" # used to create executables (works well with sbcl)
+install_if_not_found "buildapp"           # used to create executables (works well with sbcl)
 install_if_not_found "gawk"
 install_if_not_found "gcc"
 install_if_not_found "golang-go"
@@ -38,8 +38,8 @@ install_if_not_found "libclang-14-dev"
 # <<End RStudio dependencies from an installer>>
 install_if_not_found "lua5.4"
 install_if_not_found "mawk"
-install_if_not_found "openjdk-19-jdk" # replace the java version with default-jdk if you don't care about the version.
-                                      # sudo apt-get purge --autoremove openjdk* removes Java from your system
+install_if_not_found "openjdk-19-jdk"     # replace the java version with default-jdk if you don't care about the version.
+                                          # sudo apt-get purge --autoremove openjdk* removes Java from your system
 install_if_not_found "php-cli"
 install_if_not_found "python3"
 install_if_not_found "python3-pip"
@@ -48,7 +48,6 @@ install_if_not_found "r-base-core"
 install_if_not_found "ruby"
 install_if_not_found "rustc"
 install_if_not_found "sbcl"
-
 
 # APPLICATIONS
 install_if_not_found "chromium-browser"
@@ -65,31 +64,32 @@ install_if_not_found "zoom-player"
 
 
 # TOOLS AND UTILITIES
-install_if_not_found "adb"            # Used to connect my android phone to my computer for developer-mode debugging,
-                                      # which I primarily use for screencasting
-install_if_not_found "cargo"          # rust package manager
-install_if_not_found "composer"       # php package manager
+install_if_not_found "adb"                # Used to connect my android phone to my computer for developer-mode debugging,
+                                          # which I primarily use for screencasting
+install_if_not_found "cargo"              # rust package manager
+install_if_not_found "composer"           # php package manager
 install_if_not_found "docker.io"
-install_if_not_found "ffmpeg"         # video and audio converter
-install_if_not_found "gem"            # ruby package manager
+install_if_not_found "ffmpeg"             # video and audio converter
+install_if_not_found "gem"                # ruby package manager
 install_if_not_found "git"
 # <<R package installation dependencies>>
 install_if_not_found "libcurl4-openssl-dev"
 install_if_not_found "libudunits2-dev"
 install_if_not_found "libgdal-dev"
 # <<End R packages installation dependencies>>
-install_if_not_found "luarocks"       # lua package manager
-install_if_not_found "lynx"           # useful for viewing markdown documents
-install_if_not_found "pass"           # needed for gpg
-install_if_not_found "maven"          # maven is required for the java LSP
-install_if_not_found "npm"            # mason.nvim requires npm to do the work installing LSPs
+install_if_not_found "luarocks"           # lua package manager
+install_if_not_found "lynx"               # useful for viewing markdown documents
+install_if_not_found "pass"               # needed for gpg
+install_if_not_found "maven"              # maven is required for the java LSP
+install_if_not_found "npm"                # mason.nvim requires npm to do the work installing LSPs
 install_if_not_found "parallel"
-install_if_not_found "poppler-utils"  # contains the pdftotext utility
+install_if_not_found "poppler-utils"      # contains the pdftotext utility
 install_if_not_found "putty"
-install_if_not_found "scrcpy"         # I can screencast my phone onto the computer using this once the phone
-                                      # is connected to the adb server (preferably using a usb chord)
+install_if_not_found "scrcpy"             # I can screencast my phone onto the computer using this once the phone
+                                          # is connected to the adb server (preferably using a usb chord)
+install_if_not_found "texlive-latex-base" # LaTex library
 install_if_not_found "tmux"
-install_if_not_found "xdotool"        # used in some vim functions to turn off caps lock
+install_if_not_found "xdotool"            # used in some vim functions to turn off caps lock
 
 
 # PIP3 INSTALLS
