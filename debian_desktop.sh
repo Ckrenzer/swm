@@ -79,6 +79,7 @@ install_if_not_found "libudunits2-dev"
 install_if_not_found "libgdal-dev"
 # <<End R packages installation dependencies>>
 install_if_not_found "luarocks"       # lua package manager
+install_if_not_found "lynx"           # useful for viewing markdown documents
 install_if_not_found "pass"           # needed for gpg
 install_if_not_found "maven"          # maven is required for the java LSP
 install_if_not_found "npm"            # mason.nvim requires npm to do the work installing LSPs
