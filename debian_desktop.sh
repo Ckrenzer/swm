@@ -72,6 +72,7 @@ install_if_not_found "docker.io"
 install_if_not_found "ffmpeg"             # video and audio converter
 install_if_not_found "gem"                # ruby package manager
 install_if_not_found "git"
+install_if_not_found "grip"               # render markdown files the same way as GitHub via: grip -b file.md
 # <<R package installation dependencies>>
 install_if_not_found "libcurl4-openssl-dev"
 install_if_not_found "libudunits2-dev"
@@ -108,16 +109,22 @@ sudo Rscript -e "pkgs <- commandArgs(trailingOnly = TRUE)
                  installed <- rownames(installed.packages())
                  pkgs <- pkgs[!pkgs %in% installed]
                  install.packages(pkgs)" \
-                     data.table \
-                     foreach    \
-                     iterators  \
-                     parallel   \
-                     doParallel \
-                     rlang      \
-                     stringr    \
-                     ggplot2    \
-                     openxlsx   \
-                     clipr
+                     data.table    \
+                     foreach       \
+                     iterators     \
+                     parallel      \
+                     doParallel    \
+                     rlang         \
+                     stringr       \
+                     ggplot2       \
+                     openxlsx      \
+                     googlesheets4 \
+                     clipr         \
+                     arrow         \
+                     DBI           \
+                     RPostgres     \
+                     duckdb        \
+                     dbplyr
 
 
 # SPECIAL HANDLING
