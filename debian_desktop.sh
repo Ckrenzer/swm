@@ -98,6 +98,7 @@ pip3 list | grep "^jill\ " || \
     sudo pip install jill --user -U
 pip_install_if_not_found "numpy"
 pip_install_if_not_found "pandas"
+pip_install_if_not_found "datetime"
 # youtube-dl is always out of date on apt.
 # YouTube's actions make this tool unstable.
 # The pip installation is your best bet.
