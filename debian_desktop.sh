@@ -125,7 +125,8 @@ sudo Rscript -e "pkgs <- commandArgs(trailingOnly = TRUE)
                      DBI           \
                      RPostgres     \
                      duckdb        \
-                     dbplyr
+                     dbplyr        \
+                     rsconnect
 
 
 # SPECIAL HANDLING
