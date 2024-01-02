@@ -78,6 +78,7 @@ install_if_not_found "libcurl4-openssl-dev"
 install_if_not_found "libudunits2-dev"
 install_if_not_found "libgdal-dev"
 # <<End R packages installation dependencies>>
+install_if_not_found "libfontconfig1-dev" # system fonts
 install_if_not_found "luarocks"           # lua package manager
 install_if_not_found "lynx"               # useful for viewing markdown documents
 install_if_not_found "pass"               # needed for gpg
@@ -91,7 +92,6 @@ install_if_not_found "scrcpy"             # I can screencast my phone onto the c
 install_if_not_found "texlive-latex-base" # LaTex library
 install_if_not_found "tmux"
 install_if_not_found "xdotool"            # used in some vim functions to turn off caps lock
-
 
 # PIP3 INSTALLS
 pip3 list | grep "^jill\ " || \
