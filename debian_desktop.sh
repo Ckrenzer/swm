@@ -118,6 +118,11 @@ sudo Rscript -e "pkgs <- commandArgs(trailingOnly = TRUE)
                      rlang         \
                      stringr       \
                      ggplot2       \
+                     patchwork     \
+                     cowplot       \
+                     gridExtra     \
+                     knitr         \
+                     kableExtra    \
                      openxlsx      \
                      googlesheets4 \
                      clipr         \
