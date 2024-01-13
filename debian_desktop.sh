@@ -49,6 +49,7 @@ install_if_not_found "ruby"
 install_if_not_found "rustc"
 install_if_not_found "sbcl"
 
+
 # APPLICATIONS
 install_if_not_found "chromium-browser"
 install_if_not_found "firefox"
@@ -93,12 +94,10 @@ install_if_not_found "texlive-latex-base" # LaTex library
 install_if_not_found "tmux"
 install_if_not_found "xdotool"            # used in some vim functions to turn off caps lock
 
+
 # PIP3 INSTALLS
 pip3 list | grep "^jill\ " || \
     sudo pip install jill --user -U
-pip_install_if_not_found "numpy"
-pip_install_if_not_found "pandas"
-pip_install_if_not_found "datetime"
 # youtube-dl is always out of date on apt.
 # YouTube's actions make this tool unstable.
 # The pip installation is your best bet.
@@ -168,7 +167,7 @@ test -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" || \
 
 # <<julia installation>>
 jill install # requires ${HOME}/.local/bin to be on PATH for this to work
-# <<End juliat installation>>
+# <<End julia installation>>
 
 # <<quicklisp installation>>
 if test -e ~/quicklisp/setup.lisp; then
@@ -181,3 +180,12 @@ else
     rm quicklisp.lisp quicklisp.lisp.asc
 fi
 # <<End quicklisp installation>>
+
+# <<miniconda installation>>
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ~/miniconda.sh -b -p $HOME/miniconda
+rm ~/miniconda.sh
+eval "$(~/miniconda/bin/conda shell.bash hook)"
+conda init
+conda config --set auto_activate_base false
+# <<End miniconda installation>>
