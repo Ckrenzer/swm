@@ -4,6 +4,12 @@ install_if_not_found "libcurl4-openssl-dev" # R package dependency
 install_if_not_found "libssl-dev"           # R package dependency
 install_if_not_found "libudunits2-dev"      # R package dependency
 install_if_not_found "libgdal-dev"          # R package dependency
+install_if_not_found "libharfbuzz-dev"      # devtools dependency (not sure which package needs it)
+install_if_not_found "libfribidi-dev"       # devtools dependency (not sure which package needs it)
+install_if_not_found "libfreetype6-dev"     # devtools dependency (ragg package)
+install_if_not_found "libpng-dev"           # devtools dependency (ragg package)
+install_if_not_found "libtiff5-dev"         # devtools dependency (ragg package)
+install_if_not_found "libjpeg-dev"          # devtools dependency (ragg package)
 
 # install R packages
 sudo Rscript -e "pkgs <- commandArgs(trailingOnly = TRUE)
