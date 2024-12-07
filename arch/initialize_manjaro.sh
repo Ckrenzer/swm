@@ -78,6 +78,7 @@ path_dfm=${HOME}/repos/active/dfm
 git clone https://github.com/Ckrenzer/dfm.git $path_dfm
 cd $path_dfm && git checkout arch && git pull
 # <<using find in this way ensures the links use absolute paths>>
+# this fails when symlinking to a directory that already exists (like $HOME/.config/) !!!!!!
 ln -fs $(find ${path_dfm}/dotfiles -mindepth 1 -maxdepth 1) $HOME
 
 # neovim
@@ -85,6 +86,10 @@ path_nvim=${HOME}/repos/active/nvim
 git clone https://github.com/Ckrenzer/nvim.git $path_nvim
 ln -fs $path_nvim ${HOME}/.config/nvim
 nvim --headless -u ${path_nvim}/init.lua +PlugInstall +qall
+# <<sbcl setup for neovim's nvlime plugin>>
+curl -O https://beta.quicklisp.org/quicklisp.lisp && \
+    sbcl --load ./quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(quit)" && \
+    rm quicklisp.lisp
 
 # git
 git config --global user.name "Ckrenzer"
