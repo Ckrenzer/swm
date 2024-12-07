@@ -3,6 +3,7 @@
 # following a fresh manjaro install. It is not a minimal installation,
 # nor is it unattended.
 
+# assumes $HOME/local is a directory that already exists.
 
 
 # STEP 1: REMOVE FILES AND DIRECTORIES, CREATE DIRECTORIES
@@ -39,11 +40,11 @@ sudo pacman --noconfirm -S \
     tldr \
     tmux \
     virtualbox linux66-virtualbox-host-modules \
-    wind winetricks wine-mono wine_gecko
+    wind winetricks wine-mono wine_gecko \
+    xorg-xhost
 # <<manjaro does not have yay installed by default>>
 git clone https://aur.archlinux.org/yay-git.git && \
     cd yay-bin && makepkg -si && cd - && rm -rf yay-bin
-yay -S xautocfg
 
 # ENVIRONMENTS
 sudo pacman --noconfirm -S i3
@@ -78,7 +79,8 @@ path_dfm=${HOME}/repos/active/dfm
 git clone https://github.com/Ckrenzer/dfm.git $path_dfm
 cd $path_dfm && git checkout arch && git pull
 # <<using find in this way ensures the links use absolute paths>>
-# this fails when symlinking to a directory that already exists (like $HOME/.config/) !!!!!!
+# this fails when symlinking to a directory that already exists
+# (like $HOME/.config/ and all its contents) !!!!!!
 ln -fs $(find ${path_dfm}/dotfiles -mindepth 1 -maxdepth 1) $HOME
 
 # neovim
@@ -96,10 +98,15 @@ git config --global user.name "Ckrenzer"
 git config --global user.email "ckrenzer.info@gmail.com"
 
 # services
-systemctl --user start docker.service
-systemctl --user enable docker.service
-systemctl --user start xautocfg.service
-systemctl --user enable xautocfg.service
+# <<move system-wide service files>>
+ln -fs $(find ${path_dfm}/systemfiles/etc/systemd/system -mindepth 1 -maxdepth 1) /etc/systemd/system
+# <<allow root to access the user's x session>>
+sudo echo 'xhost +SI:localuser:root > /dev/null 2>&1' >> /etc/profile
+# <<move executable files used by services>>
+ln -fs ${PWD}/localbin ${HOME}/local/bin && sudo systemctl daemon-reload
+sudo systemctl enable set-keyboard-repeat-rate.service && \
+    sudo systemctl start set-keyboard-repeat-rate.service
+systemctl --user start docker.service && systemctl --user enable docker.service
 
 
 
