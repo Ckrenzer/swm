@@ -23,6 +23,7 @@ sudo pacman --noconfirm -Syyu                # force update of all software
 # TOOLS
 # <<virtualbox modules require a reboot before use>>
 sudo pacman --noconfirm -S \
+    alacritty \
     android-tools \
     base-devel \
     ctags \
@@ -33,6 +34,7 @@ sudo pacman --noconfirm -S \
     git \
     make \
     obs-studio \
+    openssh \
     parallel \
     poppler \
     ranger \
@@ -40,6 +42,7 @@ sudo pacman --noconfirm -S \
     tldr \
     tmux \
     virtualbox linux66-virtualbox-host-modules \
+    w3m \
     wind winetricks wine-mono wine_gecko \
     xorg-xhost
 # <<manjaro does not have yay installed by default>>
@@ -106,6 +109,7 @@ sudo echo 'xhost +SI:localuser:root > /dev/null 2>&1' >> /etc/profile
 ln -fs ${PWD}/localbin ${HOME}/local/bin && sudo systemctl daemon-reload
 sudo systemctl enable set-keyboard-repeat-rate.service && \
     sudo systemctl start set-keyboard-repeat-rate.service
+sudo systemctl enable sshd && sudo systemctl start sshd
 systemctl --user start docker.service && systemctl --user enable docker.service
 
 
