@@ -32,25 +32,25 @@ sudo pacman --noconfirm -S \
     ffmpeg \
     gcc \
     git \
+    jq \
+    kanshi \
     make \
     obs-studio \
     openssh \
     parallel \
     poppler \
+    postgresql \
     ranger \
     scrcpy \
     tldr \
     tmux \
     virtualbox linux66-virtualbox-host-modules \
-    w3m \
-    wind winetricks wine-mono wine_gecko \
-    xorg-xhost
-# <<manjaro does not have yay installed by default>>
+    wine winetricks wine-mono wine_gecko
+# <<some manjaro ISO files do not have yay installed by default>>
 git clone https://aur.archlinux.org/yay-git.git && \
     cd yay-bin && makepkg -si && cd - && rm -rf yay-bin
-
-# ENVIRONMENTS
-sudo pacman --noconfirm -S i3
+# duckdb cli isn't in the repositories
+curl https://install.duckdb.org | sh
 
 # NEOVIM
 sudo pacman --noconfirm -S neovim
@@ -69,8 +69,8 @@ sudo pacman --noconfirm -S \
 R -e "install.packages('languageserver', repos = 'https://cloud.r-project.org')"
 sudo pacman --noconfirm -S npm
 npm cache clean -f
-npm install -g n
-n stable
+sudo npm install -g n
+sudo n stable
 sudo npm install -g vim-language-server
 sudo npm install -g awk-language-server
 
@@ -103,12 +103,8 @@ git config --global user.email "ckrenzer.info@gmail.com"
 # services
 # <<move system-wide service files>>
 ln -fs $(find ${path_dfm}/systemfiles/etc/systemd/system -mindepth 1 -maxdepth 1) /etc/systemd/system
-# <<allow root to access the user's x session>>
-sudo echo 'xhost +SI:localuser:root > /dev/null 2>&1' >> /etc/profile
 # <<move executable files used by services>>
 ln -fs ${PWD}/localbin ${HOME}/local/bin && sudo systemctl daemon-reload
-sudo systemctl enable set-keyboard-repeat-rate.service && \
-    sudo systemctl start set-keyboard-repeat-rate.service
 sudo systemctl enable sshd && sudo systemctl start sshd
 systemctl --user start docker.service && systemctl --user enable docker.service
 
