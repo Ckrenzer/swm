@@ -43,12 +43,14 @@ sudo pacman --noconfirm -S \
     ranger \
     scrcpy \
     tldr \
-    tmux \
     virtualbox linux66-virtualbox-host-modules \
     wine winetricks wine-mono wine_gecko
 # <<some manjaro ISO files do not have yay installed by default>>
 git clone https://aur.archlinux.org/yay-git.git && \
     cd yay-bin && makepkg -si && cd - && rm -rf yay-bin
+# ensure the tmux installation supports sixel images (for terminal previews)
+# use the most recent version of yazi since it will have the best tmux compatibility
+yay -S tmux-sixel-git yazi-git
 # duckdb cli isn't in the repositories
 curl https://install.duckdb.org | sh
 
