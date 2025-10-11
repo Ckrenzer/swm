@@ -25,13 +25,16 @@ sudo pacman --noconfirm -Syyu                # force update of all software
 sudo pacman --noconfirm -S \
     alacritty \
     android-tools \
+    azure-cli \
     base-devel \
     ctags \
     docker \
+    docker-compose \
     fdupes \
     ffmpeg \
     gcc \
     git \
+    gparted \
     jq \
     kanshi \
     make \
@@ -42,17 +45,22 @@ sudo pacman --noconfirm -S \
     postgresql \
     ranger \
     scrcpy \
+    tailscale \
     tldr \
     virtualbox linux66-virtualbox-host-modules \
     wine winetricks wine-mono wine_gecko
 # <<some manjaro ISO files do not have yay installed by default>>
 git clone https://aur.archlinux.org/yay-git.git && \
     cd yay-bin && makepkg -si && cd - && rm -rf yay-bin
+# install azure functions core tools
+yay -S azure-functions-core-tools-bin
 # ensure the tmux installation supports sixel images (for terminal previews)
 # use the most recent version of yazi since it will have the best tmux compatibility
 yay -S tmux-sixel-git yazi-git
 # duckdb cli isn't in the repositories
 curl https://install.duckdb.org | sh
+# docker buildx is only available on the AUR
+yay -S docker-buildx-bin
 
 # NEOVIM
 sudo pacman --noconfirm -S neovim
@@ -109,7 +117,14 @@ ln -fs $(find ${path_dfm}/systemfiles/etc/systemd/system -mindepth 1 -maxdepth 1
 ln -fs ${PWD}/localbin ${HOME}/local/bin && sudo systemctl daemon-reload
 sudo systemctl enable sshd && sudo systemctl start sshd
 systemctl --user start docker.service && systemctl --user enable docker.service
-
+sudo systemctl enable --now tailscaled && sudo tailscale up && \
+    printf "your IPv4 address in tailscale: %s\n" "$(tailscale ip -4)"
+# <<once you have tailscale configured on your machine, you should update these values:
+sudo sysctl -w net.ipv4.conf.default.rp_filter=1
+sudo sysctl -w net.ipv4.conf.all.rp_filter=1
+#  so that the kernel only accepts packets from a source address if there
+#  exists a route back to the source address in the routing table, such as
+#  the internal interfaces in the machine. >>
 
 
 # STEP 4: DEAL WITH SENSITIVE INFORMATION
