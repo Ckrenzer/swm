@@ -27,6 +27,7 @@ sudo pacman --noconfirm -S \
     android-tools \
     azure-cli \
     base-devel \
+    bash-completion \
     ctags \
     docker \
     docker-compose \
@@ -37,16 +38,20 @@ sudo pacman --noconfirm -S \
     gparted \
     jq \
     kanshi \
+    libxcrypt-compat \
     make \
     obs-studio \
     openssh \
     parallel \
     poppler \
     postgresql \
-    ranger \
+    python-pip \
+    python-pipx \
     scrcpy \
     tailscale \
     tldr \
+    tree-sitter \
+    tree-sitter-cli \
     virtualbox linux66-virtualbox-host-modules \
     wine winetricks wine-mono wine_gecko
 # <<some manjaro ISO files do not have yay installed by default>>
@@ -70,21 +75,6 @@ test -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" || \
 
 # LANGUAGES
 sudo pacman --noconfirm -S r sbcl
-
-# LANGUAGE SERVERS
-sudo pacman --noconfirm -S \
-    bash-language-server \
-    lua-language-server \
-    pyright
-R -e "install.packages('languageserver', repos = 'https://cloud.r-project.org')"
-sudo pacman --noconfirm -S npm
-npm cache clean -f
-sudo npm install -g n
-sudo n stable
-sudo npm install -g vim-language-server
-sudo npm install -g awk-language-server
-
-
 
 # STEP 3: SET UP SERVICES AND CONFIGURATIONS
 # bash + shell-related dotfiles
