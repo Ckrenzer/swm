@@ -1,8 +1,7 @@
 #!/bin/bash
-# The purpose of this script is to quickly ready all tools and configurations
-# following a fresh manjaro install. It is not a minimal installation,
-# nor is it unattended.
+set -euo pipefail
 
+# assumes config directories are already in place.
 # assumes $HOME/local is a directory that already exists.
 
 
@@ -15,7 +14,6 @@ rm ${HOME}/.{profile,bash{_profile,rc}}
 mkdir -p ${HOME}/repos/active
 
 
-
 # STEP 2: INSTALL SOFTWARE
 sudo pacman --noconfirm -S archlinux-keyring # update keys to access/verify repos
 sudo pacman --noconfirm -Syyu                # force update of all software
@@ -23,7 +21,6 @@ sudo pacman --noconfirm -Syyu                # force update of all software
 # TOOLS
 # <<virtualbox modules require a reboot before use>>
 sudo pacman --noconfirm -S \
-    alacritty \
     android-tools \
     azure-cli \
     base-devel \
@@ -44,7 +41,6 @@ sudo pacman --noconfirm -S \
     openssh \
     parallel \
     poppler \
-    postgresql \
     python-pip \
     python-pipx \
     scrcpy \
@@ -72,9 +68,12 @@ sudo pacman --noconfirm -S neovim
 test -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" || \
     curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+## install plugins (assumes configs are already in place)
+nvim --headless -u "$HOME/.config/nvim/init.lua" +PlugInstall +qall
 
 # LANGUAGES
 sudo pacman --noconfirm -S r sbcl
+
 
 # STEP 3: SET UP SERVICES AND CONFIGURATIONS
 # bash + shell-related dotfiles

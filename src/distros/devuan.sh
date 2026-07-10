@@ -1,6 +1,9 @@
 #!/usr/bin/bash
 set -euo pipefail
 
+# assumes config directories are already in place.
+
+
 sudo apt-get update
 
 # timezone and stuff needed for many applications
