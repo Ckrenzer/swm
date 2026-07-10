@@ -71,8 +71,35 @@ test -e "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" || \
 ## install plugins (assumes configs are already in place)
 nvim --headless -u "$HOME/.config/nvim/init.lua" +PlugInstall +qall
 
-# LANGUAGES
-sudo pacman --noconfirm -S r sbcl
+# lisp
+sudo pacman --noconfirm -S sbcl
+## install, configure Quicklisp
+RUN curl -O https://beta.quicklisp.org/quicklisp.lisp && \
+    sbcl --non-interactive --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --quit
+## I like using CIEL on top of sbcl primarily due to its improved documentation
+## ASDF>=3.3.4 needed to support local-nicknames
+chmod +x ../scripts/update_asdf.sh && ../scripts/update_asdf.sh
+## CIEL build dependencies
+sudo pacman --noconfirm -S inotify-tools readline
+## install CIEL since it isn't on Quicklisp
+ciel_dir="$HOME/quicklisp/local-projects/CIEL"
+git clone https://github.com/ciel-lang/CIEL "$ciel_dir"
+## build CIEL core image, which will also install all dependencies
+cd "$ciel_dir" && make image && cd -
+
+# r
+sudo pacman --noconfirm -S r
+
+# csvquote
+## builds the executable and stores it in /usr/local/bin
+beginwd="$PWD"
+mkdir ~/repos -p
+cd ~/repos
+git clone https://github.com/dbro/csvquote.git
+cd csvquote
+make
+sudo make install
+cd "$beginwd"
 
 
 # STEP 3: SET UP SERVICES AND CONFIGURATIONS

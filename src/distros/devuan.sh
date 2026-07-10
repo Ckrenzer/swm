@@ -36,8 +36,7 @@ sudo apt-get install -y openjdk-default-jdk maven jlink
 sudo apt-get install -y sbcl
 ## install, configure Quicklisp
 RUN curl -O https://beta.quicklisp.org/quicklisp.lisp && \
-    sbcl --non-interactive --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --quit && \
-    echo '#-quicklisp (let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp" (user-homedir-pathname)))) (when (probe-file quicklisp-init) (load quicklisp-init)))' >> /root/.sbclrc
+    sbcl --non-interactive --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --quit
 ## I like using CIEL on top of sbcl primarily due to its improved documentation
 ## ASDF>=3.3.4 needed to support local-nicknames
 chmod +x ../scripts/update_asdf.sh && ../scripts/update_asdf.sh
